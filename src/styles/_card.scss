@@ -1,0 +1,18 @@
+.cards {
+
+  a {
+    text-decoration: none;
+    color: black;
+
+    &:hover, &:focus {
+      color: black;
+
+      .card {
+        background-color: indianred;
+      }
+    }
+  }
+  .card {
+    background-color: lightcoral;
+  }
+}
