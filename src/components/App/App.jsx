@@ -1,7 +1,22 @@
-import React from 'react';
+import React from "react";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+} from "react-router-dom";
+import Home from "../Home/Home";
 
-const App = () => {
-    return <div>Hello World</div>
-};
+class App extends React.Component {
+    render() {
+        return (
+            <Router>
+                <Routes>
+                    <Route exact path="/" Component={Home}/>
+                    <Route path="/:day" element={<div>Weather Day</div>}/>
+                </Routes>
+            </Router>
+        );
+    }
+}
 
 export default App;
