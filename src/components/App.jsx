@@ -2,9 +2,10 @@ import React from "react";
 import {
     BrowserRouter as Router,
     Routes,
-    Route,
+    Route, Navigate,
 } from "react-router-dom";
 import Home from "./Home";
+import WeatherDay from "./WeatherDay";
 
 class App extends React.Component {
     render() {
@@ -12,7 +13,7 @@ class App extends React.Component {
             <Router>
                 <Routes>
                     <Route exact path="/" Component={Home}/>
-                    <Route path="/:day" element={<div>Weather Day</div>}/>
+                    <Route path="/:city/:day" Component={WeatherDay}/>
                 </Routes>
             </Router>
         );

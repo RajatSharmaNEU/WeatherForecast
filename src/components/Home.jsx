@@ -5,7 +5,8 @@ import WeatherCard from "./WeatherCard";
 
 const Home = () => {
     const [showError, setShowError] = useState(false);
-    const [weathers, setWeathers] = useState([]);
+    const [eachDayWeather, setEachDayWeather] = useState([]);
+    const [cityWeather, setCityWeather] = useState([]);
     const cityRef = useRef();
     const fetchWeatherForecast = async (event) => {
         event.preventDefault();
@@ -15,13 +16,14 @@ const Home = () => {
                 const response = await axios.get(
                     `http://api.openweathermap.org/data/2.5/forecast?q=${cityRef.current.value}&units=imperial&APPID=767ca9c391439e1addd64f3fcbbf1033`
                 )
+                setCityWeather(response.data.list);
                 const weatherData = response.data.list.filter(weather => weather.dt_txt.includes("00:00:00"));
                 console.log(weatherData);
-                setWeathers(weatherData);
+                setEachDayWeather(weatherData);
                 setShowError(false);
             } catch (e) {
                 setShowError(true);
-                setWeathers([]);
+                setEachDayWeather([]);
             }
         } else {
             setShowError(true);
@@ -42,7 +44,7 @@ const Home = () => {
                        }}>Please provide valid city name!!!</Alert>
             }
             <Container className="text-center mt-5 pt-5">
-                <h3>Weather Forecast Application</h3>
+                <h3>Weather Forecast</h3>
                 <Stack direction="horizontal" gap={3} className="mt-5">
                     <Form.Control className="me-auto" placeholder="Enter city name" ref={cityRef}/>
                     <Button variant="primary" type="submit" className="btn-dark"
@@ -50,11 +52,11 @@ const Home = () => {
                 </Stack>
                 <Stack className="cards" direction="horizontal" gap={3}>
                     {
-                        weathers.map((weather, index) => (
+                        eachDayWeather.map((weather, index) => (
                             <WeatherCard
-                                reading={weather}
+                                weather={weather}
                                 key={index}
-                                completeData={weathers}
+                                cityWeather={cityWeather}
                                 cityName={cityRef.current.value}
                             />
                         ))

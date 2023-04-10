@@ -8,4 +8,11 @@ html {
   body {
     background-color: lemonchiffon;
   }
+
+  .home-link {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
+  }
 }
